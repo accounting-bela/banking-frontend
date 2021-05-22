@@ -15,10 +15,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { AppRoutingModule } from './app-routing.module';
 import { RacuniComponent } from '../components/racuni/racuni.component';
-import { LoginComponent } from '../components/login/login.component';
-import { RegisterComponent } from '../components/register/register.component';
 import {ReactiveFormsModule} from '@angular/forms';
-import {KorisnikService} from '../services/korisnik.service';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { HomeComponent } from '../components/home/home.component';
 import {environment} from '../environments/environment';
@@ -36,12 +33,12 @@ import { SvotaPipe } from '../pipes/svota.pipe';
 import { NoviRacunComponent } from '../components/novi-racun/novi-racun.component';
 import { NovaStrankaComponent } from '../components/nova-stranka/nova-stranka.component';
 import { SifraComponent } from '../components/sifra/sifra.component';
-import {AuthConfigModule} from '../keycloak/auth.config.module';
 import { FindStrankaComponent } from '../components/find-stranka/find-stranka.component';
 import { StrankeComponent } from '../components/stranke/stranke.component';
 import { MojeStrankeComponent } from '../components/moje-stranke/moje-stranke.component';
 import { MojiRacuniComponent } from '../components/moji-racuni/moji-racuni.component';
 import { DetaljiRacunaComponent } from '../components/detalji-racuna/detalji-racuna.component';
+import {AuthModule} from '@auth0/auth0-angular';
 
 
 
@@ -49,8 +46,6 @@ import { DetaljiRacunaComponent } from '../components/detalji-racuna/detalji-rac
   declarations: [
     AppComponent,
     RacuniComponent,
-    LoginComponent,
-    RegisterComponent,
     HomeComponent,
     SvotaPipe,
     NoviRacunComponent,
@@ -65,6 +60,10 @@ import { DetaljiRacunaComponent } from '../components/detalji-racuna/detalji-rac
   imports: [
     BrowserModule,
     AppRoutingModule,
+    AuthModule.forRoot({
+      domain: 'dev-e4zdhtbo.eu.auth0.com',
+      clientId: 'svpThqAVTfN1q0qbAJibZkfBfAwkb0z9'
+    }),
     BrowserAnimationsModule,
     MatToolbarModule,
     MatSidenavModule,
@@ -77,11 +76,9 @@ import { DetaljiRacunaComponent } from '../components/detalji-racuna/detalji-rac
     MatInputModule,
     MatCheckboxModule,
     ReactiveFormsModule,
-    HttpClientModule,
-    AuthConfigModule
+    HttpClientModule
   ],
   providers: [
-    KorisnikService,
     GradService,
     AdresaService,
     SifraNamjeneService,

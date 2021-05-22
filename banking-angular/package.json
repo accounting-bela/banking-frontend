@@ -22,16 +22,15 @@
     "@angular/platform-browser": "~11.0.0",
     "@angular/platform-browser-dynamic": "~11.0.0",
     "@angular/router": "~11.0.0",
+    "@auth0/auth0-angular": "^1.5.0",
     "@ng-web-apis/common": "^1.9.0",
     "@ng-web-apis/geolocation": "^1.0.3",
-    "angular-oauth2-oidc": "^10.0.3",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.1100.1",
-    "@angular/cli": "~11.0.1",
     "@angular/compiler-cli": "~11.0.0",
     "@types/jasmine": "~3.6.0",
     "@types/node": "^12.11.1",

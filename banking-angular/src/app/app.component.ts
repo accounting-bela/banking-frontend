@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {NavigationStart, Router} from '@angular/router';
 import {GeolocationService} from '@ng-web-apis/geolocation';
-import {OAuthService} from 'angular-oauth2-oidc';
+import {AuthService} from '@auth0/auth0-angular';
 
 @Component({
   selector: 'app-root',
@@ -19,12 +19,11 @@ export class AppComponent {
   ];
   isLogin = false;
 
-  constructor(private router: Router, private oauthService: OAuthService) {
-    router.events.forEach((event) => {
-      if (event instanceof NavigationStart) {
-        if (event.url.includes('login')) {
-          this.isLogin = true;
-        }
+  constructor(private router: Router, private auth: AuthService) {
+    this.auth.isAuthenticated$.subscribe(res => {
+      if(!res)
+      {
+        this.auth.loginWithRedirect();
       }
     });
   }
@@ -38,6 +37,6 @@ export class AppComponent {
   }
 
   logout(): void {
-    this.oauthService.logOut();
+    this.auth.logout();
   }
 }
