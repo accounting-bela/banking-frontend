@@ -19,8 +19,9 @@ jobs:
           key: AngularCircleCI-{{ .Branch }}-{{ checksum "package.json" }}
           paths:
             - "node_modules"
-      # - run: xvfb-run -a npm run test -- --single-run --no-progress --browser=ChromeNoSandbox
-      # - run: xvfb-run -a npm run e2e -- --no-progress --config=protractor-ci.conf.j      
+      - run: npm install
+      - run: xvfb-run -a npm run test -- --single-run --no-progress --browser=ChromeNoSandbox
+      - run: xvfb-run -a npm run e2e -- --no-progress --config=protractor-ci.conf.j      
       - run: npm run start 
       - run: docker build -t banking-frontend .
       - run: docker tag banking-frontend lahur.ddns.net:5000/banking-frontend:$CIRCLE_BUILD_NUM
