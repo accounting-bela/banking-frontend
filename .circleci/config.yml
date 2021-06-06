@@ -1,0 +1,27 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/banking-angular/banking-angular
+    docker:
+      - image: circleci/node:8-browsers
+      - image: circleci/buildpack-deps:stretch
+    steps:
+      - run:
+          name: Login to DockerHub
+          command: docker login -u $DOCKER_USER -p $DOCKER_PASS $DOCKER_REGISTRY
+      - checkout:
+          path: ~/banking-angular
+      - restore_cache:
+          key: AngularCircleCI-{{ .Branch }}-{{ checksum "package.json" }}
+      - run: npm install
+      - save_cache:
+          key: AngularCircleCI-{{ .Branch }}-{{ checksum "package.json" }}
+          paths:
+            - "node_modules"
+      - run: xvfb-run -a npm run test -- --single-run --no-progress --browser=ChromeNoSandbox
+      - run: xvfb-run -a npm run e2e -- --no-progress --config=protractor-ci.conf.js
+      - run: docker build -t banking-frontend .
+      - run: docker tag banking-frontend lahur.ddns.net:5000/banking-frontend:$CIRCLE_BUILD_NUM
+      - run: docker tag banking-frontend lahur.ddns.net:5000/banking-frontend:latest
+      - run: docker push lahur.ddns.net:5000/banking-frontend:$CIRCLE_BUILD_NUM
+      - run: docker push lahur.ddns.net:5000/banking-frontend:latest
