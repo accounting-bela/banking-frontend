@@ -5,7 +5,8 @@ jobs:
     docker:
       - image: circleci/node:8-browsers
       - image: circleci/buildpack-deps:stretch
-    working_directory: ~/banking-frontend/banking-angular  
+    working_directory: ~/banking-frontend
+    build_dir: banking-angular
     steps:
       - run:
           name: Login to DockerHub
