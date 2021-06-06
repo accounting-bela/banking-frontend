@@ -9,8 +9,7 @@ jobs:
       - run:
           name: Login to DockerHub
           command: docker login -u $DOCKER_USER -p $DOCKER_PASS $DOCKER_REGISTRY
-      - checkout:
-          path: ~/banking-angular
+      - checkout
       - setup_remote_docker      
       - restore_cache:
           key: AngularCircleCI-{{ .Branch }}-{{ checksum "package.json" }}
