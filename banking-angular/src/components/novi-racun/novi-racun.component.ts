@@ -20,9 +20,13 @@ export class NoviRacunComponent implements OnInit {
   primatelj: Stranka = null;
   sifra: SifraNamjene = null;
   racunGroup: FormGroup;
+  ibanUplatitelj: string;
+  ibanPrimatelj: string;
 
   constructor(private dialog: MatDialog, private dialogRef: MatDialogRef<NoviRacunComponent>, private racunStore: RacunStore, @Inject( MAT_DIALOG_DATA ) public data?: string) {
     this.racunGroup = new FormGroup({
+      uplatitelj: new FormControl(null, [Validators.required]),
+      priatelj: new FormControl(null, [Validators.required]),
       valuta: new FormControl(null, [Validators.required]),
       iznos: new FormControl(null, [Validators.required]),
       opis: new FormControl(null, [Validators.required]),
@@ -134,13 +138,13 @@ export class NoviRacunComponent implements OnInit {
     racun.opis = this.racunGroup.get('opis').value;
     racun.sifraNamjene = this.sifra;
 
-    if(this.data === 'ingoing')
+    if (this.data === 'ingoing')
     {
       this.racunStore.saveIngoing(racun).subscribe(() => {
         this.dialogRef.close();
       });
     }
-    if(this.data === 'outgoing')
+    if (this.data === 'outgoing')
     {
       this.racunStore.saveOutgoing(racun).subscribe(() => {
         this.dialogRef.close();

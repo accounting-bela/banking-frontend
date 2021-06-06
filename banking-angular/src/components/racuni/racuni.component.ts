@@ -7,6 +7,8 @@ import {NoviRacunComponent} from '../novi-racun/novi-racun.component';
 import {MatTableDataSource} from '@angular/material/table';
 import {SelectionModel} from '@angular/cdk/collections';
 import {DetaljiRacunaComponent} from '../detalji-racuna/detalji-racuna.component';
+import {HttpClient} from "@angular/common/http";
+import {environment} from "../../environments/environment";
 
 @Component({
   selector: 'app-racuni',
@@ -20,7 +22,10 @@ export class RacuniComponent implements OnInit {
   selection = new SelectionModel<Racun>(true, []);
   numRows = 0;
 
-  constructor(private racunStore: RacunStore, private dialog: MatDialog) {
+  constructor(private racunStore: RacunStore, private dialog: MatDialog, private httpClient: HttpClient) {
+    this.httpClient.get(environment.url + '/korisnik').subscribe(res => {
+
+    });
     this.racuni = this.racunStore.racun$;
     this.racuni.subscribe(res => {
       this.numRows = res.length;
