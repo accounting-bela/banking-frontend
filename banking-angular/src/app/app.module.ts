@@ -15,7 +15,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { AppRoutingModule } from './app-routing.module';
 import { RacuniComponent } from '../components/racuni/racuni.component';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { HomeComponent } from '../components/home/home.component';
 import {environment} from '../environments/environment';
@@ -38,7 +38,7 @@ import { StrankeComponent } from '../components/stranke/stranke.component';
 import { MojeStrankeComponent } from '../components/moje-stranke/moje-stranke.component';
 import { MojiRacuniComponent } from '../components/moji-racuni/moji-racuni.component';
 import { DetaljiRacunaComponent } from '../components/detalji-racuna/detalji-racuna.component';
-import {AuthModule} from '@auth0/auth0-angular';
+import {AuthHttpInterceptor, AuthModule} from '@auth0/auth0-angular';
 
 
 
@@ -62,7 +62,21 @@ import {AuthModule} from '@auth0/auth0-angular';
     AppRoutingModule,
     AuthModule.forRoot({
       domain: 'dev-e4zdhtbo.eu.auth0.com',
-      clientId: 'svpThqAVTfN1q0qbAJibZkfBfAwkb0z9'
+      clientId: 'svpThqAVTfN1q0qbAJibZkfBfAwkb0z9',
+      audience: 'https://banking/api',
+      scope: 'access:api',
+      redirectUri: window.location.origin,
+      httpInterceptor: {
+        allowedList: [
+          {
+            uri: environment.url + '/*',
+            tokenOptions: {
+              audience: 'https://banking/api',
+              scope: 'read:current_user'
+            }
+          }
+        ]
+      }
     }),
     BrowserAnimationsModule,
     MatToolbarModule,
@@ -76,9 +90,11 @@ import {AuthModule} from '@auth0/auth0-angular';
     MatInputModule,
     MatCheckboxModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true },
     GradService,
     AdresaService,
     SifraNamjeneService,
