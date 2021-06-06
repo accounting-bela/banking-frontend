@@ -1,7 +1,7 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/banking-angular/banking-angular
+    working_directory: ~/banking-frontend/banking-angular
     docker:
       - image: circleci/node:8-browsers
       - image: circleci/buildpack-deps:stretch
@@ -9,7 +9,8 @@ jobs:
       - run:
           name: Login to DockerHub
           command: docker login -u $DOCKER_USER -p $DOCKER_PASS $DOCKER_REGISTRY
-      - checkout
+      - checkout:
+          path: ~/banking-frontend
       - setup_remote_docker      
       - restore_cache:
           key: AngularCircleCI-{{ .Branch }}-{{ checksum "package.json" }}
