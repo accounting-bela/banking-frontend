@@ -19,7 +19,7 @@ jobs:
           key: AngularCircleCI-{{ .Branch }}-{{ checksum "package.json" }}
           paths:
             - "node_modules" 
-      - run: npm run build
+      - run: npm run build-prod
       - run: docker build -t banking-frontend .
       - run: docker tag banking-frontend lahur.ddns.net:5000/banking-frontend:$CIRCLE_BUILD_NUM
       - run: docker tag banking-frontend lahur.ddns.net:5000/banking-frontend:latest
