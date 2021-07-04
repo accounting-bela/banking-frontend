@@ -23,9 +23,6 @@ export class RacuniComponent implements OnInit {
   numRows = 0;
 
   constructor(private racunStore: RacunStore, private dialog: MatDialog, private httpClient: HttpClient) {
-    this.httpClient.get(environment.url + '/korisnik').subscribe(res => {
-
-    });
     this.racuni = this.racunStore.racun$;
     this.racuni.subscribe(res => {
       this.numRows = res.length;
