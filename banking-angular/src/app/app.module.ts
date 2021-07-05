@@ -65,7 +65,7 @@ import {AuthHttpInterceptor, AuthModule} from '@auth0/auth0-angular';
       clientId: 'svpThqAVTfN1q0qbAJibZkfBfAwkb0z9',
       audience: 'https://banking/api',
       scope: 'access:api',
-      redirectUri: window.location.origin,
+      redirectUri: 'https://www.belavic-accounting.tk/',
       httpInterceptor: {
         allowedList: [
           {
