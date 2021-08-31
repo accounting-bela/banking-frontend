@@ -1,0 +1,40 @@
+<div style="width: 50%; margin: 50px auto;">
+  <mat-toolbar *ngIf="currentFile" class="progress-bar">
+    <mat-progress-bar color="accent" [value]="progress"></mat-progress-bar>
+    <span class="progress">{{ progress }}%</span>
+  </mat-toolbar>
+
+  <mat-form-field>
+    <div>
+      <mat-toolbar>
+        <input matInput readonly [value]="fileName" />
+
+        <button
+          mat-flat-button
+          color="primary"
+          [disabled]="!currentFile"
+          (click)="upload()"
+        >
+          Upload
+        </button>
+      </mat-toolbar>
+
+      <input
+        type="file"
+        id="fileInput"
+        (change)="selectFile($event)"
+        name="fileInput"
+      />
+
+
+    </div>
+  </mat-form-field>
+  <mat-form-field appearance="legacy" style="width: 200px">
+    <mat-label>Lozinka</mat-label>
+    <input matInput [(ngModel)]="password"/>
+  </mat-form-field>
+</div>
+
+<div *ngIf="message" class="message" style="width: 50%; margin: 0 auto;">
+  {{ message }}
+</div>

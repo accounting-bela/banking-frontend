@@ -39,6 +39,8 @@ import { MojeStrankeComponent } from '../components/moje-stranke/moje-stranke.co
 import { MojiRacuniComponent } from '../components/moji-racuni/moji-racuni.component';
 import { DetaljiRacunaComponent } from '../components/detalji-racuna/detalji-racuna.component';
 import {AuthHttpInterceptor, AuthModule} from '@auth0/auth0-angular';
+import { CertifikatComponent } from '../components/certifikat/certifikat.component';
+import {MatProgressBarModule} from "@angular/material/progress-bar";
 
 
 
@@ -55,7 +57,8 @@ import {AuthHttpInterceptor, AuthModule} from '@auth0/auth0-angular';
     StrankeComponent,
     MojeStrankeComponent,
     MojiRacuniComponent,
-    DetaljiRacunaComponent
+    DetaljiRacunaComponent,
+    CertifikatComponent,
   ],
   imports: [
     BrowserModule,
@@ -91,7 +94,8 @@ import {AuthHttpInterceptor, AuthModule} from '@auth0/auth0-angular';
     MatCheckboxModule,
     ReactiveFormsModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    MatProgressBarModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true },

@@ -16,6 +16,7 @@ export class AppComponent {
     {icon: 'insert_drive_file', name: 'Moji računi', route: 'moji-racuni'},
     {icon: 'find_in_page', name: 'Stranke', route: 'stranke'},
     {icon: 'contact_page', name: 'Moje stranke', route: 'moje-stranke'},
+    {icon: 'collections_bookmark', name: 'Certifikati', route: 'certifikati'}
   ];
   isLogin = false;
 

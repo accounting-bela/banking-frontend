@@ -5,6 +5,7 @@ import {HomeComponent} from '../components/home/home.component';
 import {MojeStrankeComponent} from '../components/moje-stranke/moje-stranke.component';
 import {StrankeComponent} from '../components/stranke/stranke.component';
 import {MojiRacuniComponent} from '../components/moji-racuni/moji-racuni.component';
+import {CertifikatComponent} from "../components/certifikat/certifikat.component";
 
 
 const routes: Routes = [
@@ -13,7 +14,8 @@ const routes: Routes = [
   { path: 'racuni', component: RacuniComponent },
   { path: 'moji-racuni', component: MojiRacuniComponent },
   { path: 'moje-stranke', component: MojeStrankeComponent},
-  { path: 'stranke', component: StrankeComponent}
+  { path: 'stranke', component: StrankeComponent},
+  {path: 'certifikati', component: CertifikatComponent}
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
