@@ -21,7 +21,7 @@ jobs:
             - "node_modules" 
       - run: npm run build-prod
       - run: docker build -t banking-frontend .
-      - run: docker tag banking-frontend lahur.ddns.net:5000/banking-frontend:$CIRCLE_BUILD_NUM
-      - run: docker tag banking-frontend lahur.ddns.net:5000/banking-frontend:latest
-      - run: docker push lahur.ddns.net:5000/banking-frontend:$CIRCLE_BUILD_NUM
-      - run: docker push lahur.ddns.net:5000/banking-frontend:latest
+      - run: docker tag banking-frontend $DOCKER_REGISTRY_TAG/banking-frontend:$CIRCLE_BUILD_NUM
+      - run: docker tag banking-frontend $DOCKER_REGISTRY_TAG/banking-frontend:latest
+      - run: docker push $DOCKER_REGISTRY_TAG/banking-frontend:$CIRCLE_BUILD_NUM
+      - run: docker push $DOCKER_REGISTRY_TAG/banking-frontend:latest
